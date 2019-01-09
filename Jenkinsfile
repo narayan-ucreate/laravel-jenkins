@@ -16,8 +16,8 @@ pipeline {
             }
             steps {
                 sh 'php --version'
-                sh 'docker up -d pdo_pgsql'
-                sh 'docker up -d libpq-dev'
+                sh 'docker pull pdo_pgsql'
+                sh 'docker pull libpq-dev'
             }
         }
         stage('install database') {
