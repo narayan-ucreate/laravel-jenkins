@@ -11,39 +11,26 @@ pipeline {
     }
     stages {
         stage('install php') {
-            agent {
-                docker { image 'ucreateit/laravel-pgsql' }
-            }
             steps {
-                sh 'php --version'
+                sh 'docker pull ucreateit/php7.1:v0.1'
+                sh 'docker pull composer'
             }
         }
 
-
-        stage('install pg pdo') {
-             agent {
-                    docker { image 'rhkl/php-fpm-alpine' }
-             }
-             steps {
-                 echo 'success'
-             }
-        }
         stage('install database') {
             steps {
              sh 'docker-compose -f docker-compose.yml up -d postgres-test'
             }
         }
         stage('install composer') {
-            agent {
-                docker { image 'composer' }
-            }
             steps {
              sh "php -r \"copy('.env.example', '.env');\""
              sh 'php --version'
              sh 'composer --version'
              sh 'composer install'
              sh 'php artisan key:generate'
-             sh 'php artisan migrate'
+             sh 'phpinfo()'
+             //sh 'php artisan migrate'
              sh './vendor/phpunit/phpunit/phpunit'
             }
         }
