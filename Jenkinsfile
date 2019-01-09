@@ -4,7 +4,6 @@ pipeline {
    }
    environment {
        APP_VERSION = '1'
-       APP_KEY='base64:6sdkkH477UqH1nAGPpqfCjZemJoafRCAMpJDtbGeems='
    }
    stages {
        stage('Build') {
@@ -16,6 +15,7 @@ pipeline {
        stage('Test') {
            steps {
               sh "php -r \"copy('.env.example', '.env');\""
+              sh 'php artisan key:generate'
               sh './vendor/phpunit/phpunit/phpunit'
            }
        }
