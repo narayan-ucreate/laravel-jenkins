@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('install php') {
             agent {
-                docker { image 'php' }
+                docker { image 'ucreateit/php7.1:v0.1' }
             }
             steps {
                 sh 'php --version'
