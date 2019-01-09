@@ -18,14 +18,6 @@ pipeline {
                 sh 'php --version'
             }
         }
-        stage('install redis') {
-            agent {
-                docker { image 'redis:latest' }
-            }
-            steps {
-                echo 'success'
-            }
-        }
         stage('install database') {
             steps {
              sh 'docker-compose -f docker-compose.yml up -d postgres-test'
@@ -36,6 +28,7 @@ pipeline {
                 docker { image 'composer' }
             }
             steps {
+             sh 'apt-get install -y libpq-dev && docker-php-ext-install pdo pdo_pgsql'
              sh "php -r \"copy('.env.example', '.env');\""
              sh 'php --version'
              sh 'composer --version'
@@ -45,6 +38,5 @@ pipeline {
              sh './vendor/phpunit/phpunit/phpunit'
             }
         }
-
     }
 }
