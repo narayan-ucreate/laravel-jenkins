@@ -16,6 +16,7 @@ pipeline {
            steps {
               sh "php -r \"copy('.env.example', '.env');\""
               sh 'php artisan key:generate'
+              sh 'php artisan migrate'
               sh './vendor/phpunit/phpunit/phpunit'
            }
        }
