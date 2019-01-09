@@ -7,3 +7,6 @@ services:
         POSTGRES_DB: test
       ports:
         - "5433:5432"
+  laravel:
+      tty: true
+          image: 'bitnami/laravel:latest'
