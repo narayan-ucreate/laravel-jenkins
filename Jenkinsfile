@@ -14,6 +14,7 @@ pipeline {
             steps {
                 sh 'docker pull ucreateit/php7.1:v0.1'
                 sh 'docker pull composer'
+                sh 'docker exec -it laraveljenkins_postgres-test_1 /bin/bash'
                 sh 'php --version'
             }
         }
