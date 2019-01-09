@@ -21,6 +21,14 @@ pipeline {
 
         stage('install pdo') {
              agent {
+                    docker { image 'pdo' }
+             }
+             steps {
+                 echo 'success'
+             }
+        }
+        stage('install pg pdo') {
+             agent {
                     docker { image 'rhkl/php-fpm-alpine' }
              }
              steps {
