@@ -1,6 +1,7 @@
 pipeline {
    agent {
        docker { image 'bitnami/laravel'}
+       docker { image 'docker/compose' }
    }
    environment {
        APP_VERSION = '1'
@@ -17,8 +18,8 @@ pipeline {
        }
        stage('postgress install') {
           agent {
-                                 docker { image 'docker/compose' }
-                             }
+             docker { image 'docker/compose' }
+          }
           steps {
              sh 'docker-compose -f docker-compose.yml up postgres-test'
           }
