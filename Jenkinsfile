@@ -17,7 +17,7 @@ pipeline {
        }
        stage('postgress install') {
           steps {
-            sh 'docker run --name postgres1 -v /tmp/pgdata:/var/lib/postgresql/data -e POSTGRES_PASSWORD=postgres -d postgres'
+             sh '/usr/local/bin/docker-compose -f docker-compose.yml up postgres-test'
           }
       }
        stage('Test') {
