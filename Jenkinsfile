@@ -16,8 +16,7 @@ pipeline {
             }
             steps {
                 sh 'php --version'
-                sh 'docker pull pdo_pgsql'
-                sh 'docker pull libpq-dev'
+                sh 'docker pull danny50610/gitlab-ci-pipeline-php'
             }
         }
         stage('install database') {
