@@ -11,16 +11,14 @@ pipeline {
     }
     stages {
         stage('install php') {
-            agent {
-                docker { image 'docker run -v $(pwd):/app -w /app --link database karllhughes/php-cli-postgres php index.php' }
-            }
             steps {
+                sh 'docker run --rm -v $(pwd):/app -w /app --link database karllhughes/php-cli-postgres php index.php'
                 sh 'php --version'
             }
         }
         stage('install database') {
             steps {
-             sh 'docker run -d --name database -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres  POSTGRES_DB=test postgres:9.6'
+             sh 'docker run -d --rm --name database -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres  POSTGRES_DB=test postgres:9.6'
             }
         }
         stage('install composer') {
