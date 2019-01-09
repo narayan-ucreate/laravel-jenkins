@@ -36,9 +36,12 @@ pipeline {
                 docker { image 'composer' }
             }
             steps {
+             sh "php -r \"copy('.env.example', '.env');\""
              sh 'php --version'
              sh 'composer --version'
              sh 'composer install'
+             sh 'php artisan key:generate'
+             sh 'php artisan migrate'
              sh './vendor/phpunit/phpunit/phpunit'
             }
         }
