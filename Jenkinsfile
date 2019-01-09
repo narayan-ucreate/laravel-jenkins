@@ -16,14 +16,8 @@ pipeline {
            }
        }
        stage('postgress install') {
-          agent {
-            docker {
-               args 'POSTGRES_PASSWORD:postgres POSTGRES_DB: test'
-               image 'postgres:10.3-alpine'
-             }
-          }
           steps {
-             echo 'install postgress'
+            sh 'docker run --name postgres1 -v /tmp/pgdata:/var/lib/postgresql/data -e POSTGRES_PASSWORD=postgres -d postgres'
           }
       }
        stage('Test') {
