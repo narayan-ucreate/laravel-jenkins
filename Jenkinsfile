@@ -16,8 +16,11 @@ pipeline {
            }
        }
        stage('postgress install') {
+          agent {
+                                 docker { image 'docker/compose' }
+                             }
           steps {
-             sh 'docker-compose up -d'
+             sh 'docker-compose -f docker-compose.yml up postgres-test'
           }
       }
        stage('Test') {
