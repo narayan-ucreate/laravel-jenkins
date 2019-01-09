@@ -13,7 +13,7 @@ pipeline {
         stage('install database') {
             steps {
              sh 'docker-compose -f docker-compose.yml up -d'
-             sh 'docker run -it -d laraveljenkins_laravel_1 ./vendor/phpunit/phpunit/phpunit'
+             sh 'docker run -it -d bitnami/laravel:latest ./vendor/phpunit/phpunit/phpunit'
             }
         }
     }
