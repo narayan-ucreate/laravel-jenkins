@@ -17,7 +17,7 @@ pipeline {
        }
        stage('postgress install') {
           steps {
-             sh 'docker-compose –f docker-compose.yml run –rm postgres-test'
+             sh 'docker-compose -f docker-compose.yml up postgres-test'
           }
       }
        stage('Test') {
