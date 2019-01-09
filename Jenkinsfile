@@ -11,9 +11,13 @@ pipeline {
     }
     stages {
         stage('install php') {
+            agent {
+                docker { image 'ucreateit/php7.1:v0.1' }
+            }
             steps {
-                sh 'docker-compose -f docker-compose.yml up -d php-install'
                 sh 'php --version'
+                sh 'docker up -d pdo_pgsql'
+                sh 'docker up -d libpq-dev'
             }
         }
         stage('install database') {
