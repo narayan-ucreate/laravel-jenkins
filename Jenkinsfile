@@ -16,8 +16,14 @@ pipeline {
            }
        }
        stage('postgress install') {
+          agent {
+            docker {
+               args 'POSTGRES_PASSWORD:postgres POSTGRES_DB: test'
+               image 'postgres:10.3-alpine'
+             }
+          }
           steps {
-             sh 'docker-compose -f docker-compose.yml up postgres-test'
+             echo 'install postgress'
           }
       }
        stage('Test') {
