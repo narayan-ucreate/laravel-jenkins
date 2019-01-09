@@ -11,14 +11,26 @@ pipeline {
     }
     stages {
         stage('install php') {
+            agent {
+                docker { image 'ucreateit/laravel-pgsql' }
+            }
             steps {
-                sh 'docker run --rm -v $(pwd):/app -w /app --link database karllhughes/php-cli-postgres php index.php'
                 sh 'php --version'
             }
         }
+
+
+        stage('install pg pdo') {
+             agent {
+                    docker { image 'rhkl/php-fpm-alpine' }
+             }
+             steps {
+                 echo 'success'
+             }
+        }
         stage('install database') {
             steps {
-             sh 'docker run -d --rm --name database -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres  POSTGRES_DB=test postgres:9.6'
+             sh 'docker-compose -f docker-compose.yml up -d postgres-test'
             }
         }
         stage('install composer') {
