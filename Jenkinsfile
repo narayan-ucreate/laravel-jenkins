@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('install php') {
             agent {
-                docker { image 'allansimon/php7-fpm-postgresql' }
+                docker { image 'karllhughes/php-cli-postgres' }
             }
             steps {
                 sh 'php --version'
