@@ -14,6 +14,7 @@ pipeline {
        }
        stage('Test') {
            steps {
+              sh 'php artisan key:generate'
               sh './vendor/phpunit/phpunit/phpunit'
            }
        }
