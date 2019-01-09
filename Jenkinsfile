@@ -21,7 +21,7 @@ pipeline {
 
         stage('install pdo') {
              agent {
-                    docker { image 'danny50610/gitlab-ci-pipeline-php' }
+                    docker { image 'rhkl/php-fpm-alpine' }
              }
              steps {
                  echo 'success'
