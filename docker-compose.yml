@@ -8,5 +8,4 @@ services:
       ports:
         - "5433:5432"
   laravel:
-      tty: true
-          image: 'bitnami/laravel:latest'
+      image: 'bitnami/laravel:latest'
