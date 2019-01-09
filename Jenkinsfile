@@ -4,6 +4,9 @@ pipeline {
    }
    environment {
        APP_VERSION = '1'
+       DB_DATABASE='dev'
+       DB_USERNAME='postgres'
+       DB_PASSWORD='postgres'
    }
    stages {
        stage('Build') {
