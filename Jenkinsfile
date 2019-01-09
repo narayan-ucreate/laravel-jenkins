@@ -18,7 +18,7 @@ pipeline {
         }
         stage('install database') {
             steps {
-             sh 'docker run -d --rm --name database -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres  POSTGRES_DB=test postgres:9.6'
+             sh 'docker run -d --rm -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres  POSTGRES_DB=test postgres:9.6'
             }
         }
         stage('install composer') {
