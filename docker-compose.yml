@@ -1,6 +1,5 @@
 version: '2'
 services:
-
   postgres-test:
       image: postgres:10.3-alpine
       environment:
