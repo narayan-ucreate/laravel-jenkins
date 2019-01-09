@@ -23,6 +23,9 @@ pipeline {
              agent {
                     docker { image 'danny50610/gitlab-ci-pipeline-php' }
              }
+             steps {
+                 echo 'success'
+             }
         }
         stage('install database') {
             steps {
