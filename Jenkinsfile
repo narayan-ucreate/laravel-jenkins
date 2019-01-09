@@ -12,21 +12,14 @@ pipeline {
     stages {
         stage('install php') {
             agent {
-                docker { image 'ucreateit/php7.1:v0.1' }
+                docker { image 'allansimon/php7-fpm-postgresql' }
             }
             steps {
                 sh 'php --version'
             }
         }
 
-        stage('install pdo') {
-             agent {
-                    docker { image 'pdo' }
-             }
-             steps {
-                 echo 'success'
-             }
-        }
+
         stage('install pg pdo') {
              agent {
                     docker { image 'rhkl/php-fpm-alpine' }
