@@ -11,10 +11,8 @@ pipeline {
     }
     stages {
         stage('install php') {
-            agent {
-                docker { image 'ucreateit/php7.1:v0.1' }
-            }
             steps {
+                sh 'docker-compose -f docker-compose.yml up -d php-install'
                 sh 'php --version'
             }
         }
@@ -28,7 +26,6 @@ pipeline {
                 docker { image 'composer' }
             }
             steps {
-             sh 'apt-get install -y libpq-dev && docker-php-ext-install pdo pdo_pgsql'
              sh "php -r \"copy('.env.example', '.env');\""
              sh 'php --version'
              sh 'composer --version'
