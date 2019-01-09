@@ -1,7 +1,6 @@
 pipeline {
    agent {
        docker { image 'bitnami/laravel'}
-       docker { image 'docker/compose' }
    }
    environment {
        APP_VERSION = '1'
