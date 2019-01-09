@@ -7,7 +7,3 @@ services:
         POSTGRES_DB: test
       ports:
         - "5433:5432"
-
-  php-install:
-      image: ucreateit/php7.1:v0.1
-      command: "apt-get install -y libpq-dev && docker-php-ext-install pdo pdo_pgsql"
