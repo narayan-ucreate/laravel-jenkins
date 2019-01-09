@@ -16,9 +16,13 @@ pipeline {
             }
             steps {
                 sh 'php --version'
-                sh 'eval "$(docker-machine env default)"'
-                sh 'docker pull danny50610/gitlab-ci-pipeline-php'
             }
+        }
+
+        stage('install pdo') {
+             agent {
+                    docker { image 'danny50610/gitlab-ci-pipeline-php' }
+             }
         }
         stage('install database') {
             steps {
