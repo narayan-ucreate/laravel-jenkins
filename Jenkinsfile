@@ -4,7 +4,7 @@ pipeline {
    }
    environment {
        APP_VERSION = '1'
-       DB_DATABASE='dev'
+       DB_DATABASE='test'
        DB_USERNAME='postgres'
        DB_PASSWORD='postgres'
    }
@@ -15,6 +15,11 @@ pipeline {
               sh 'composer install'
            }
        }
+       stage('postgress install') {
+          steps {
+             sh 'docker-compose start postgres-test'
+          }
+      }
        stage('Test') {
            steps {
               sh "php -r \"copy('.env.example', '.env');\""
