@@ -1,25 +1,25 @@
 pipeline {
-   agent {  docker { image 'bitnami/laravel'}
-               }
-
+   agent {
+       docker { image 'bitnami/laravel'}
+   }
    environment {
        APP_VERSION = '1'
    }
    stages {
        stage('Build') {
            steps {
-                  sh 'php --version'
-                  sh 'composer install'
+              sh 'php --version'
+              sh 'composer install'
            }
        }
        stage('Test') {
            steps {
-               echo 'test Done....'
+              sh './vendor/phpunit/phpunit/phpunit'
            }
        }
        stage('Deploy') {
            steps {
-               echo 'Deploying....'
+              echo 'Deploying....'
            }
        }
    }
