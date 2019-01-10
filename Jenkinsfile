@@ -10,10 +10,30 @@ pipeline {
         DB_PASSWORD='secret'
     }
     stages {
+        stage('install php') {
+            agent {
+                docker { image 'ucreateit/php7.1:v0.1' }
+            }
+            steps {
+                sh 'php --version'
+            }
+        }
         stage('install database') {
             steps {
-             sh 'docker-compose -f docker-compose.yml up -d'
-             sh 'docker run -it -d bitnami/laravel:latest ./vendor/phpunit/phpunit/phpunit'
+             sh 'docker-compose -f docker-compose.yml up -d postgres-test'
+            }
+        }
+        stage('install composer') {
+            agent {
+                docker { image 'composer' }
+            }
+            steps {
+             sh "php -r \"copy('.env.example', '.env');\""
+             sh 'php --version'
+             sh 'composer --version'
+             sh 'composer install'
+             sh 'php artisan key:generate'
+             sh './vendor/phpunit/phpunit/phpunit'
             }
         }
     }
