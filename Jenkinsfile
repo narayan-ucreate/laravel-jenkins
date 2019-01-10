@@ -17,6 +17,9 @@ pipeline {
             steps {
                 sh 'php --version'
                 sh 'php -m'
+                sh "php -r \"copy('.env.example', '.env');\""
+                sh 'php artisan key:generate'
+                sh 'composer install'
             }
         }
         stage('install database') {
@@ -26,16 +29,7 @@ pipeline {
             }
         }
         stage('install composer') {
-            agent {
-                docker { image 'composer' }
-            }
             steps {
-             sh "php -r \"copy('.env.example', '.env');\""
-             sh 'php --version'
-             sh 'composer --version'
-             sh 'composer install'
-             sh 'php artisan key:generate'
-             sh 'php -m'
              sh './vendor/phpunit/phpunit/phpunit'
             }
         }
