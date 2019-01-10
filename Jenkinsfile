@@ -19,7 +19,7 @@ pipeline {
                 sh 'php -m'
                 sh "php -r \"copy('.env.example', '.env');\""
                 sh 'php artisan key:generate'
-                sh 'sudo composer self-update'
+                sh 'sudo -H composer self-update'
             }
         }
         stage('install database') {
