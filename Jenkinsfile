@@ -30,7 +30,7 @@ pipeline {
         }
         stage('install composer') {
             steps {
-             sh './vendor/phpunit/phpunit/phpunit'
+             sh 'phpunit'
             }
         }
     }
