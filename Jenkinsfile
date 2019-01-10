@@ -17,6 +17,7 @@ pipeline {
             steps {
                 sh 'php --version'
                 sh 'php -m'
+                sh './vendor/phpunit/phpunit/phpunit'
             }
         }
         stage('install database') {
