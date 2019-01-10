@@ -16,6 +16,7 @@ pipeline {
             }
             steps {
                 sh 'php --version'
+                sh 'php -m'
             }
         }
         stage('install database') {
