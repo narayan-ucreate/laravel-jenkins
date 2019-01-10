@@ -23,7 +23,6 @@ pipeline {
             steps {
              sh 'docker-compose -f docker-compose.yml up -d postgres-test'
              sh 'docker-compose -f docker-compose.yml up -d pgadmin'
-             sh './vendor/phpunit/phpunit/phpunit'
             }
         }
         stage('install composer') {
@@ -36,6 +35,7 @@ pipeline {
              sh 'composer --version'
              sh 'composer install'
              sh 'php artisan key:generate'
+             sh 'php -m'
              sh './vendor/phpunit/phpunit/phpunit'
             }
         }
