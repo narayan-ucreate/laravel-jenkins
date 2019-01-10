@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/users', function (\App\User $user) {
+    echo '<pre>';
+    print_r($user->get()->toArray());
+});
+
