@@ -23,9 +23,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        echo 'environment';
-        echo $this->app->environment('Production');
-        exit;
         if ($this->app->environment('Production')) {
             $this->app->register(\Jenssegers\Rollbar\RollbarServiceProvider::class);
         }
